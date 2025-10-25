@@ -14,6 +14,11 @@ write_files:
     cluster-init: true
     tls-san:
     - ${control_plane_ip}
+    disable:
+    # Disable Traefik, we want to deploy our own Ingress controller
+    - traefik
+    # Disable the built-in Helm controller, we want to use FluxCD
+    disable-helm-controller: true
     %{ else }
     server: "${control_plane_address}"
     %{ endif }
@@ -29,7 +34,14 @@ write_files:
 
     echo "Installing k3s (${role})"
 
-    curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL="v1.34" sh -s - %{ if role == "control-plane" }server%{ else }agent%{ endif }
+    export INSTALL_K3S_CHANNEL="v1.34"
+    %{ if role == "control-plane" }
+    export INSTALL_K3S_EXEC="server"
+    %{ else }
+    export INSTALL_K3S_EXEC="agent"
+    %{ endif }
+
+    curl -sfL https://get.k3s.io | sh -s -
 
     %{ if role == "control-plane" }
     sed 's/127.0.0.1/${control_plane_ip}/' /etc/rancher/k3s/k3s.yaml > /home/${ssh_user}/kubeconfig.yaml
