@@ -19,11 +19,19 @@ write_files:
     - traefik
     # Disable the built-in Helm controller, we want to use FluxCD
     disable-helm-controller: true
+    # don't run workload on control plane nodes
+    node-taint:
+    - "node-role.kubernetes.io/control-plane:NoSchedule"
+    - "CriticalAddonsOnly:NoSchedule"
     %{ else }
     server: "${control_plane_address}"
     %{ endif }
     token-file: /var/lib/rancher/k3s/server/token
     node-external-ip: ${node_ip}
+    node-label:
+    - pool=${role}
+    # isolate control plane nodes from LoadBalancer traffic
+    - svccontroller.k3s.cattle.io/enablelb=%{ if role == "control-plane" }false%{ else }true%{ endif }
 - path: /opt/install-k3s.sh
   permissions: "0700"
   content: |

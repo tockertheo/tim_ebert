@@ -34,6 +34,6 @@ variable "worker_nodes" {
   })
   default = {
     count  = 3
-    flavor = "gp1.medium"
+    flavor = "m1.extra_large"
   }
 }
