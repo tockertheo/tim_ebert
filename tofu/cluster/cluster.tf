@@ -21,6 +21,7 @@ locals {
       "control-plane" = {
         role        = "control-plane"
         name        = "${local.resource_name}-control-plane"
+        flavor_id   = data.openstack_compute_flavor_v2.control_plane.id
         volume_size = 20
       }
     },
@@ -29,7 +30,8 @@ locals {
       "worker-${i}" => {
         role        = "worker"
         name        = "${local.resource_name}-worker-${i}"
-        volume_size = 50
+        flavor_id   = data.openstack_compute_flavor_v2.worker.id
+        volume_size = 100
       }
     }
   )

@@ -31,16 +31,17 @@ resource "openstack_blockstorage_volume_v3" "node_data" {
   description = "Persistent data disk for node ${each.value.name}"
   metadata    = local.common_metadata
   size        = each.value.volume_size
+
+  enable_online_resize = true
 }
 
 resource "openstack_compute_instance_v2" "node" {
   for_each = local.nodes
 
-  name = each.value.name
-  tags = local.common_tags_sanitized
-  flavor_id = (each.value.role == "control-plane" ? data.openstack_compute_flavor_v2.control_plane.id :
-  data.openstack_compute_flavor_v2.worker.id)
-  key_pair = openstack_compute_keypair_v2.keypair.name
+  name      = each.value.name
+  tags      = local.common_tags_sanitized
+  flavor_id = each.value.flavor_id
+  key_pair  = openstack_compute_keypair_v2.keypair.name
 
   block_device {
     source_type      = "volume"
