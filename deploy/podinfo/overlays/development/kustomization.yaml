@@ -13,3 +13,11 @@ images:
 
 patches:
 - path: patch-deployment.yaml
+- target:
+    kind: Ingress
+    name: podinfo
+  patch: |
+    - op: add
+      path: /spec/rules/0/host
+      # <sub-domain>.<cluster-name>.dski23a.timebertt.dev
+      value: podinfo-dev.timebertt.dski23a.timebertt.dev

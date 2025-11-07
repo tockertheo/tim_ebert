@@ -28,3 +28,11 @@ patches:
     - op: replace
       path: /spec/ports/0/port
       value: 12000
+- target:
+    kind: Ingress
+    name: podinfo
+  patch: |
+    - op: add
+      path: /spec/rules/0/host
+      # <sub-domain>.<cluster-name>.dski23a.timebertt.dev
+      value: podinfo.timebertt.dski23a.timebertt.dev

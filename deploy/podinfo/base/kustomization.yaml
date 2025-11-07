@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
 # pull in the base manifests from the remote repository, so we don't need to duplicate them here
 - github.com/stefanprodan/podinfo//kustomize
+# add our Ingress manifest (from Lab ingress-nginx)
+- ingress.yaml
 
 # create a ConfigMap to hold our custom UI message
 # kustomize appends a hash to the name, so the Deployment is rolled out when the ConfigMap changes
