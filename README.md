@@ -13,6 +13,9 @@ The [labs directory](labs) contains solutions and explanations for each exercise
 
 - [Kustomize](labs/kustomize.md)
 - [Helm](labs/helm.md)
+- [Flux](labs/flux.md)
+- [ingress-nginx](labs/ingress-nginx.md)
+- [external-dns](labs/external-dns.md)
 
 ## Prerequisites
 

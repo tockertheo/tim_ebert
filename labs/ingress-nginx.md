@@ -50,8 +50,6 @@ The `host` field are set in the respective overlays by a patch in the `kustomiza
 
 See [this commit](https://github.com/timebertt/platform-engineering-lab/commit/a979958124916ebedd9f1ea5637e53c6ea2b188d) for the complete changes.
 
-## Verify Ingress Access
-
 After committing the changes and pushing them to the GitHub repository, Flux deploys the added `Ingress` resources in both environments.
 Both `Ingress` objects should be ready and have an external address assigned.
 
@@ -61,6 +59,8 @@ NAMESPACE      NAME      CLASS   HOSTS                                         A
 podinfo-dev    podinfo   nginx   podinfo-dev.timebertt.dski23a.timebertt.dev   141.72.176.127,141.72.176.195,141.72.176.219   80      89s
 podinfo-prod   podinfo   nginx   podinfo.timebertt.dski23a.timebertt.dev       141.72.176.127,141.72.176.195,141.72.176.219   80      86s
 ```
+
+## Verify Ingress Access
 
 We can connect to the `podinfo` application in both environments using `curl`.
 As long as we don't configure public DNS records for these hostnames, we need to connect to one of the external IP addresses directly and set the `Host` header to the requested hostname.
