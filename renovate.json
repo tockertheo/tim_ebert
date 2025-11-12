@@ -13,6 +13,7 @@
     "managerFilePatterns": ["/\\.yaml$/"]
   },
   "automergeStrategy": "squash",
+  "ignoreTests": true,
   "packageRules": [
     {
       "description": "Automerge all patch updates",
