@@ -17,6 +17,7 @@ The [labs directory](labs) contains solutions and explanations for each exercise
 - [ingress-nginx](labs/ingress-nginx.md)
 - [external-dns](labs/external-dns.md)
 - [cert-manager](labs/cert-manager.md)
+- [renovate](labs/renovate.md)
 
 ## Prerequisites
 
