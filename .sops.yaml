@@ -1,0 +1,16 @@
+creation_rules:
+# Encrypt data and stringData fields of Kubernetes Secret YAML files ending with .encrypted.yaml
+- path_regex: \.encrypted\.yaml$
+  encrypted_regex: ^(data|stringData)$
+  # authenticating only the encrypted data allows updating metadata fields without re-encrypting
+  mac_only_encrypted: true
+  age: age13trtw82hqsmyfqn6s3du406dgh5zu0es6j3xuzgsqsaynq9dxvhsq0ysj9
+
+# Encrypt plain text files ending with .encrypted
+- path_regex: \.encrypted$
+  age: age13trtw82hqsmyfqn6s3du406dgh5zu0es6j3xuzgsqsaynq9dxvhsq0ysj9
+
+stores:
+  # Configure 2-space indentation for YAML files
+  yaml:
+    indent: 2
