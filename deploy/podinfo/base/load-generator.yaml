@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  labels:
+    component: load-generator
+spec:
+  # load can be adjusted by changing the number of replicas
+  selector:
+    matchLabels:
+      component: load-generator
+  template:
+    metadata:
+      labels:
+        component: load-generator
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: load-generator
+        image: alpine/curl
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            while true; do
+              date -Is
+              curl -sSo /dev/null http://podinfo:$PODINFO_SERVICE_PORT_HTTP/
+              # wait a random time between 0.1s and 0.9s
+              sleep 0.$(( $RANDOM % 10 ))
+            done

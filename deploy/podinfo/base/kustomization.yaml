@@ -6,6 +6,16 @@ resources:
 - github.com/stefanprodan/podinfo//kustomize
 # add our Ingress manifest (from Lab ingress-nginx)
 - ingress.yaml
+# add our ServiceMonitor manifest (from Lab Prometheus Operator)
+- servicemonitor.yaml
+# add load generator Deployment (from Lab Prometheus Operator)
+- load-generator.yaml
+
+# add common labels to all resources
+# the ServiceMonitor selects the podinfo Service via labels, so it requires the labels to be present on the Service
+labels:
+- pairs:
+    app: podinfo
 
 # create a ConfigMap to hold our custom UI message
 # kustomize appends a hash to the name, so the Deployment is rolled out when the ConfigMap changes
@@ -17,3 +27,17 @@ configMapGenerator:
 # customize the base manifests from the remote repository
 patches:
 - path: patch-deployment.yaml
+# extend the Service ports list (from Lab Prometheus Operator)
+- target:
+    kind: Service
+    name: podinfo
+  patch: |-
+    - op: add
+      path: /spec/ports/-
+      value: 
+        # in the remote base manifests, the http-metrics port is only defined in the Deployment but not in the Service
+        # add the http-metrics port to be scraped by Prometheus (via ServiceMonitor)
+        name: http-metrics
+        port: 9797
+        protocol: TCP
+        targetPort: http-metrics

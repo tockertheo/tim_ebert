@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: podinfo
+  labels:
+    # must match the .spec.serviceMonitorSelector in the Prometheus custom resource
+    # by default, the kube-prometheus-stack Helm chart uses the label selector release=<release-name>
+    release: kube-prometheus-stack
+spec:
+  endpoints:
+  # must match the port name in the Service
+  - port: http-metrics
+    path: /metrics
+    interval: 10s
+  selector:
+    matchLabels:
+      # must match the labels of the Service
+      app: podinfo
