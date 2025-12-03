@@ -23,6 +23,7 @@ The [labs directory](labs) contains solutions and explanations for each exercise
 - [prometheus](labs/prometheus.md)
 - [prometheus-operator](labs/prometheus-operator.md)
 - [grafana](labs/grafana.md)
+- [skaffold](labs/skaffold.md)
 
 ## Prerequisites
 

@@ -1,0 +1,29 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: web-app
+build:
+  artifacts:
+  # Build the web-app image using ko (https://skaffold.dev/docs/builders/builder-types/ko/).
+  # ko (https://ko.build/) is a simple tool for building container images based on Go applications
+  # and doesn't require a Dockerfile. It builds images directly from Go source code.
+  # Skaffold will build the image, load it into the kind cluster, and replace the web-app image reference
+  # in the Deployment manifest with the image ref built by ko.
+  - image: web-app
+    context: web-app
+    ko:
+      # the main Go package to build is located directly in the web-app directory (see context field)
+      main: .
+# point skaffold to the deployment manifests (kustomization)
+manifests:
+  kustomize:
+    paths:
+    - deploy/web-app
+# set up port forwarding so that the web-app service is accessible on localhost:8888
+# this is only active during `skaffold dev` or `skaffold run --port-forward`
+portForward:
+- resourceType: deployment
+  resourceName: web-app
+  namespace: web-app
+  port: 8888
+  localPort: 8888
