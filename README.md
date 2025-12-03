@@ -22,6 +22,7 @@ The [labs directory](labs) contains solutions and explanations for each exercise
 - [kube-prometheus-stack](labs/kube-prometheus-stack.md)
 - [prometheus](labs/prometheus.md)
 - [prometheus-operator](labs/prometheus-operator.md)
+- [grafana](labs/grafana.md)
 
 ## Prerequisites
 
