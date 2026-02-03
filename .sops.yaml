@@ -4,11 +4,11 @@ creation_rules:
   encrypted_regex: ^(data|stringData)$
   # authenticating only the encrypted data allows updating metadata fields without re-encrypting
   mac_only_encrypted: true
-  age: age13trtw82hqsmyfqn6s3du406dgh5zu0es6j3xuzgsqsaynq9dxvhsq0ysj9
+  age: age1pvu03ch8cgm0eh8kc5wrpcpsgs3kqv765jmdqlj90nlgwx9avqzsjt0grd ##publickey
 
 # Encrypt plain text files ending with .encrypted
 - path_regex: \.encrypted$
-  age: age13trtw82hqsmyfqn6s3du406dgh5zu0es6j3xuzgsqsaynq9dxvhsq0ysj9
+  age: age1pvu03ch8cgm0eh8kc5wrpcpsgs3kqv765jmdqlj90nlgwx9avqzsjt0grd  ##publickey
 
 stores:
   # Configure 2-space indentation for YAML files

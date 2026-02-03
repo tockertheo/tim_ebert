@@ -55,7 +55,7 @@ spec:
     - service
 
     registry: txt
-    txtOwnerId: timebertt # <cluster-name>, e.g., student-abcd
+    txtOwnerId: group-copm # <cluster-name>, e.g., student-abcd
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

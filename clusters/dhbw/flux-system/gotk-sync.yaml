@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: ssh://git@github.com/timebertt/platform-engineering-lab
+  url: ssh://git@github.com/tockertheo/tim_ebert ### eigene repo mit timebert shit
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

@@ -49,7 +49,7 @@ spec:
         # Define the host for Grafana ingress
         # <sub-domain>.<cluster-name>.dski23a.timebertt.dev
         hosts:
-        - &host grafana.timebertt.dski23a.timebertt.dev
+        - &host grafana.group-copm.dski23a.timebertt.dev ### eigene id
         tls:
         - secretName: grafana-tls
           hosts:
@@ -84,7 +84,7 @@ spec:
         # Define the host for Prometheus ingress
         # <sub-domain>.<cluster-name>.dski23a.timebertt.dev
         hosts:
-        - &host prometheus.timebertt.dski23a.timebertt.dev
+        - &host prometheus.group-copm.dski23a.timebertt.dev
         tls:
         - secretName: prometheus-tls
           hosts:
